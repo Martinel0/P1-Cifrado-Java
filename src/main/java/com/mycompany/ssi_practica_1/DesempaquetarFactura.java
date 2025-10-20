@@ -27,7 +27,7 @@ import java.security.spec.X509EncodedKeySpec;
  *   5) Escribe factura en salida.json
  */
 public class DesempaquetarFactura {
-
+    //algoritmo de firma 
     private static final String SIG_ALGO = "SHA256withRSA";
 
     public static void main(String[] args) {
@@ -42,6 +42,7 @@ public class DesempaquetarFactura {
         String tsaPubPath = args[4];
 
         try {
+            //se registra el proveeder oBouncyCastle como BC
             Security.addProvider(new BouncyCastleProvider());
 
             // 1) Leer paquete
@@ -59,9 +60,11 @@ public class DesempaquetarFactura {
             PublicKey pubEmpresa = loadPublicKey(empresaPubPath);
             Signature verEmp = Signature.getInstance(SIG_ALGO, "BC");
             verEmp.initVerify(pubEmpresa);
-            verEmp.update(algos);
+            //con el update pasamos el contenido que la empresa firmo
+            verEmp.update(algos); 
             verEmp.update(iv);
             verEmp.update(facturaCifrada);
+            //calcula el hash del mensaje pasado con update con el hash que tiene la empresa con su clave publica
             boolean okEmp = verEmp.verify(firmaEmpresa);
             System.out.println("Firma Empresa: " + (okEmp ? "VÁLIDA ✅" : "NO VÁLIDA ❌"));
 
@@ -73,9 +76,10 @@ public class DesempaquetarFactura {
             md.update(facturaCifrada);
             md.update(claveEnvuelta);
             md.update(firmaEmpresa);
-            byte[] hEmpresa = md.digest();
+            byte[] hEmpresa = md.digest(); //se guarda en hEmpresa el hash 256 bits calculado
 
             PublicKey pubTSA = loadPublicKey(tsaPubPath);
+            //
             Signature verTSA = Signature.getInstance(SIG_ALGO, "BC");
             verTSA.initVerify(pubTSA);
             verTSA.update(tsaTimestamp);
@@ -112,6 +116,7 @@ public class DesempaquetarFactura {
         }
     }
 
+    //verificar que tiene todos los campos necesarios
     private static byte[] must(Paquete p, String nombre) {
         byte[] b = p.getContenidoBloque(nombre);
         if (b == null || b.length == 0)
@@ -119,6 +124,7 @@ public class DesempaquetarFactura {
         return b;
     }
 
+    //Para cargar la clave de la empresa
     private static PublicKey loadPublicKey(String path) throws Exception {
         byte[] der = Files.readAllBytes(Path.of(path)); // DER (X.509)
         X509EncodedKeySpec spec = new X509EncodedKeySpec(der);

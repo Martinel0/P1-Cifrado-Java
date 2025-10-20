@@ -130,18 +130,5 @@ private static PrivateKey loadPrivateKey(String path) throws Exception {
 }
 
 
-    /**
-     * Convierte un PEM a DER eliminando cabeceras/rodapié y espacios.
-     * Acepta: PUBLIC KEY / PRIVATE KEY
-     */
-    private static byte[] readPemStripHeaders(String pem) throws IOException {
-        String s = pem
-                .replace("-----BEGIN PUBLIC KEY-----", "")
-                .replace("-----END PUBLIC KEY-----", "")
-                .replace("-----BEGIN PRIVATE KEY-----", "")
-                .replace("-----END PRIVATE KEY-----", "")
-                .replaceAll("\s", "");
-        return Base64.getDecoder().decode(s);
-    }
 }
 

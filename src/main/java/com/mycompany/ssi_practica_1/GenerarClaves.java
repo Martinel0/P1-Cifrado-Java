@@ -33,7 +33,7 @@ public class GenerarClaves {
 		PublicKey clavePublica = clavesRSA.getPublic();
 
 		/*** 1 Volcar clave privada  a fichero */
-		// 1.1 Recuperar de la clave su codificaciÃ³n en formato PKS8 (necesario para escribirla a disco)
+		// 1.1 Recuperar de la clave su codificacion en formato PKS8 (necesario para escribirla a disco)
 		byte[] encodedPKCS8 = clavePrivada.getEncoded();
 
 		// 1.2 Escribirla a fichero binario
@@ -42,7 +42,7 @@ public class GenerarClaves {
 		out.close();
 
 		/*** 3 Volcar clave publica  a fichero */
-		// 3.1  Recuperar de la clave su codificaciÃ³n en formato X509 (necesario para escribirla a disco)
+		// 3.1  Recuperar de la clave su codificacion en formato X509 (necesario para escribirla a disco)
 		byte[] encodedX509 = clavePublica.getEncoded();
 
 		// 3.2 Escribirla a fichero binario
@@ -50,7 +50,7 @@ public class GenerarClaves {
 		out.write(encodedX509);
 		out.close();
 		
-		System.out.println("Generadas claves RSA pÃºblica y privada de 512 bits en ficheros "+args[0] + ".publica"+ " y "+args[0] + ".privada");
+		System.out.println("Generadas claves RSA publica y privada de 512 bits en ficheros "+args[0] + ".publica"+ " y "+args[0] + ".privada");
 
 	}
 
