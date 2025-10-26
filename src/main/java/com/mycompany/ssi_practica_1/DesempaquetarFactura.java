@@ -86,7 +86,7 @@ public class DesempaquetarFactura {
             verTSA.update(hEmpresa);
             boolean okTSA = verTSA.verify(firmaTSA);
             String tsString = new String(tsaTimestamp, StandardCharsets.UTF_8);
-            System.out.println("Sello TSA: " + (okTSA ? ("VÁLIDO ✅ — " + tsString) : "NO VÁLIDO ❌"));
+            System.out.println("Sello TSA: " + (okTSA ? ("VÁLIDO  — " + tsString) : "NO VÁLIDO "));
 
             // 4) Descifrar factura (solo si las verificaciones pasan; si no, avisar y continuar bajo tu riesgo)
             if (!okEmp) {
