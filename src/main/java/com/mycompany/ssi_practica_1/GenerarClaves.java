@@ -12,7 +12,7 @@ import javax.crypto.spec.*;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 // Necesario para usar el provider Bouncy Castle (BC)
-//    Para compilar incluir el fichero JAR en el classpath
+
 
 public class GenerarClaves {
 	public static void main(String[] args) throws Exception {

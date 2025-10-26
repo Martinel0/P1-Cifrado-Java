@@ -86,7 +86,7 @@ public class EmpaquetarFactura {
             sig.update(facturaCifrada);
             byte[] firmaEmpresa = sig.sign();
 
-            // 6) Construir paquete usando EXPLÍCITAMENTE la clase Paquete del enunciado
+            // 6) Construir paquete usando  la clase Paquete del enunciado
             Paquete p = new Paquete();
             p.anadirBloque("ALGOS", algosBytes);                 // nombres normalizados por Paquete
             p.anadirBloque("IV_O_NONCE", iv);
@@ -98,7 +98,7 @@ public class EmpaquetarFactura {
             p.escribirPaquete(paqueteOut);
             System.out.println("[OK] Factura empaquetada en: " + paqueteOut);
 
-            // 8) (Opcional de depuración) Releer el paquete con la MISMA clase Paquete para listar los bloques
+            // 8) Releer el paquete con la MISMA clase Paquete para listar los bloques
             Paquete comprobacion = new Paquete(paqueteOut);
             System.out.println("Bloques escritos en el paquete:");
             for (String nombre : comprobacion.getNombresBloque()) {

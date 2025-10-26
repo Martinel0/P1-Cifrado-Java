@@ -72,7 +72,7 @@ public class SellarFactura {
             }
 
             // 3) Construir timestamp y hash de los bloques de Empresa
-            String timestamp = Instant.now().toString(); // ISO-8601 UTC (termina en 'Z')
+            String timestamp = Instant.now().toString(); 
             byte[] tsBytes = timestamp.getBytes(StandardCharsets.UTF_8);
 
             // Hash de todos los bloques aportados por Empresa para que cualquier cambio invalide el sello
