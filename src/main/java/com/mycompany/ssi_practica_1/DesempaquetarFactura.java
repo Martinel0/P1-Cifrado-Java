@@ -66,7 +66,7 @@ public class DesempaquetarFactura {
             verEmp.update(facturaCifrada);
             //calcula el hash del mensaje pasado con update con el hash que tiene la empresa con su clave publica
             boolean okEmp = verEmp.verify(firmaEmpresa);
-            System.out.println("Firma Empresa: " + (okEmp ? "VÁLIDA ✅" : "NO VÁLIDA ❌"));
+            System.out.println("Firma Empresa: " + (okEmp ? "VÁLIDA " : "NO VÁLIDA "));
 
             // 3) Verificar sello TSA
             // hEmpresa = SHA256( algos || iv || facturaCifrada || claveEnvuelta || firmaEmpresa )
